@@ -6,7 +6,7 @@
  * @author   Myron Turner <turnemm02@shaw.ca>
  */
  
-define('DOKU_INC', realpath(dirname(__FILE__)) . '/../../../');
+define('DOKU_INC', realpath(dirname(__FILE__)) . '/../../../../');
 require_once(DOKU_INC.'inc/init.php');
 require_once(DOKU_INC.'inc/io.php');
 
