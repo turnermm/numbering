@@ -22,7 +22,7 @@ function numberingNextNumber(edid) {
         var debug = false;
         var params = "";
         jQuery.ajax({
-           url: DOKU_BASE + 'lib/plugins/numbering/getnum.php',
+           url: DOKU_BASE + 'lib/plugins/numbering/scripts/getnum.php',
            async: false,
            data: params,    
            type: 'POST',
