@@ -16,7 +16,7 @@ exit;
 function numberingProcessNum() 
 {
     $db = numberingDB();
-    $helper =  $tag = plugin_load('helper', 'numbering');
+    $helper = plugin_load('helper', 'numbering');
 
     $start = urldecode($helper->getConfValue('nstart'));
     $number = getNumberingNextNumber($db, $start);
