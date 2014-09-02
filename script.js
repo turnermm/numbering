@@ -41,7 +41,7 @@ if(!window.insertAtCarret) {
     var insertAtCarret = function (textAreaID, text)
     {
         var txtarea = jQuery('#' + textAreaID)[0];
-        var selection = getSelection(txtarea);
+        var selection =  DWgetSelection(txtarea);
         pasteText(selection,text,{nosel: true});
     };
 
