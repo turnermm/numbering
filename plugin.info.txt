@@ -1,7 +1,7 @@
 base numbering
 author Myron Turner
 email turnermm02@shaw.ca
-date 2014-05-28
+date 2014-09-01
 name numbering plugin
 desc clicking on numbering icon prints next available number to editor, with formatting
 url https://dokuwiki.org/plugin:numbering
