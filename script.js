@@ -31,18 +31,26 @@ function numberingNextNumber(edid) {
                if(debug) {            
                   alert(data);                   
                }
-              insertAtCarret(edid,data);
+              
+              if(DWgetSelection) {
+                 numberInsertAtCarret(edid,data);    
+              } 
+              else window.insertAtCarret(edid,data);             
     }
     });
 
 }
-
-if(!window.insertAtCarret) {
-    var insertAtCarret = function (textAreaID, text)
+ 
+    var numberInsertAtCarret = function (textAreaID, text)
     {
         var txtarea = jQuery('#' + textAreaID)[0];
         var selection =  DWgetSelection(txtarea);
-        pasteText(selection,text,{nosel: true});
+        add = selection.getText();
+        if(add) {
+            add  = add.replace(/^\s+/);
+            add  = add.replace(/\s+$/);
+            text = text.replace(/%R/,add);
+        }
+        pasteText(selection,text);
     };
 
-}
