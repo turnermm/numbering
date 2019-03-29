@@ -21,8 +21,11 @@ class action_plugin_numbering extends DokuWiki_Action_Plugin {
          if ($event->data['revertFrom']) return;
           if(!$event->data['contentChanged'] ) return;
           if(strpos($event->data['newContent'], '~~GetNextNumber~~') === false) return;
-    
-          $number = $this->getNextNumber();          
+          $padding =  $this->helper->getConfValue('padding');
+		  $len = (int)  $this->helper->getConfValue('pad_length');
+          $number = $this->getNextNumber();     
+		  $number =  str_pad((string)$number, (int)$len, $padding, STR_PAD_LEFT);
+  		  
           $event->data['newContent'] = str_replace('~~GetNextNumber~~', $number,$event->data['newContent']);
         }
         
