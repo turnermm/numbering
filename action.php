@@ -14,19 +14,36 @@ class action_plugin_numbering extends DokuWiki_Action_Plugin {
               $this->helper = plugin_load('helper', 'numbering');
         }
         public function register(Doku_Event_Handler $controller) {     
-          $controller->register_hook('COMMON_WIKIPAGE_SAVE', 'BEFORE', $this, 'handle_save',array('before'));   
+          $controller->register_hook('COMMON_WIKIPAGE_SAVE', 'BEFORE', $this, 'handle_save',array('before'));
+          $controller->register_hook('TPL_CONTENT_DISPLAY', 'BEFORE', $this, 'handle_read',array('before')); 		  
+ 	
         }
         
-        function handle_save(Doku_Event $event, $param) {   
+        function handle_save(Doku_Event $event, $param) {  
          if ($event->data['revertFrom']) return;
           if(!$event->data['contentChanged'] ) return;
           if(strpos($event->data['newContent'], '~~GetNextNumber~~') === false) return;
+          $event->data['newContent'] = str_replace('~~GetNextNumber~~', $this->format_number(),$event->data['newContent']);
+        }
+        function handle_read(Doku_Event $event, $param){
+            if(strpos($event->data,'bureaucracy') == false) return;
+           $numfield = $this->getConf('bureaucracy'); 
+           
+		  $event->data = preg_replace_callback(
+			'#<label>\s*<span>('. $numfield .')</span>\s*<input.*?\>#',
+			function ($matches) {		
+                  if(strpos($matches[0],'bureaucracy') == false) return $matches[0];
+				return preg_replace('#class=\"edit\"#', 'value="' . $this->format_number() .'"',$matches[0]);
+			},
+			$event->data
+		);		  
+
+		}
+        function format_number(){
           $padding =  $this->helper->getConfValue('padding');
 		  $len = (int)  $this->helper->getConfValue('pad_length');
           $number = $this->getNextNumber();     
-		  $number =  str_pad((string)$number, (int)$len, $padding, STR_PAD_LEFT);
-  		  
-          $event->data['newContent'] = str_replace('~~GetNextNumber~~', $number,$event->data['newContent']);
+		  return  str_pad((string)$number, (int)$len, $padding, STR_PAD_LEFT);	
         }
         
         function numberingDB() {
@@ -61,4 +78,16 @@ class action_plugin_numbering extends DokuWiki_Action_Plugin {
             io_unlock($db);
             return "$number";
         }
+		
+function write_debug($data) {
+  return;
+  if (!$handle = fopen(DOKU_INC .'read.txt', 'a')) {
+    return;
+    }
+ 
+    // Write $somecontent to our opened file.
+    fwrite($handle, "$data\n");
+    fclose($handle);
+
+}
 }  
