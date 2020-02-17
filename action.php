@@ -44,14 +44,13 @@ class action_plugin_numbering extends DokuWiki_Action_Plugin {
 		}
 	
 	function _ajax_call(Doku_Event $event, $param) {      
-    $this->write_debug('ajax');
-      $this->write_debug($event->data);
+
        if ($event->data != 'numbr_bureau') return;       
-       $this->write_debug($event->data);
+     
        $event->stopPropagation();
       $event->preventDefault();	  
 	   $num = $this->format_number() ;
-        $this->write_debug($num);
+      
 	  echo "$num";
 	}	 
         function format_number(){
