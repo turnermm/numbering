@@ -18,6 +18,25 @@ if (window.toolbar != undefined) {
     };
 }
 
+jQuery( document ).ready(function() {
+     jQuery( "#bureau_num" ).click(function() {
+            var _ret = jQuery(this);
+            var params = "";
+            params = 'call=numbr_bureau';
+            jQuery.ajax({     
+               url:  DOKU_BASE + 'lib/exe/ajax.php',
+               async: true,
+               data: params,    
+               type: 'POST',
+               dataType: 'html',         
+               success: function(data){ 	
+                       if(data) _ret.val(data);
+                }
+              });
+        }); 
+});
+
+
 function numberingNextNumber(edid) {
         var debug = false;
         var params = "";
