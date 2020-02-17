@@ -34,7 +34,9 @@ class action_plugin_numbering extends DokuWiki_Action_Plugin {
 			'#<label>\s*<span>('. $numfield .')</span>\s*<input.*?\>#',
 			function ($matches) {		
                   if(strpos($matches[0],'bureaucracy') == false) return $matches[0];
-                 return preg_replace('#class=\"edit\"#', 'value = "" id="' .'bureau_num' .'"',$matches[0]);
+                $matches[0] =  preg_replace('#class=\"edit\"#', 'value = "" id="' .'bureau_num' .'"',$matches[0]);
+                $matches[0] .="<br /><span>Click textbox to insert number</span>";
+                return  $matches[0];                
 			},
 			$event->data
 		);		  
