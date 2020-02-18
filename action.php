@@ -36,12 +36,12 @@ class action_plugin_numbering extends DokuWiki_Action_Plugin {
             $numfield = str_replace(',','|',$this->getConf('bureaucracy')); 
             $numfield = preg_replace("/\s+/","",$numfield );
 		  $event->data = preg_replace_callback(
-			'#<label>\s*<span>('. $numfield .')</span>\s*(<input.*?\>)\s*</label>#',
+			'#<label>\s*<span>\s*('. $numfield .').*?</span>\s*(<input.*?\>)\s*</label>#',
 			function ($matches) {		
                   if(strpos($matches[0],'bureaucracy') == false) return $matches[0];
                   global $num;
-                  $matches[2] = preg_replace('#class=\"edit\"#', 'value = "" id="' .'bureau_nmbr_' .  $num  .   '"',$matches[2]) ; 
-                 $retv = $matches[1] .' ' . $matches[2].  '&nbsp;&nbsp;<img src="' . NUMBERING_ICON  . '" id = "bureau_num_' . $num .'" class = "numbering_clk"><br />' ;
+                  $matches[2] = preg_replace('#class=\"edit.*?\"#', 'value = "" id="' .'bureau_nmbr_' .  $num  .   '"',$matches[2]) ; 
+                 $retv = '<br />' .$matches[1] .' ' . $matches[2].  '&nbsp;&nbsp;<img src="' . NUMBERING_ICON  . '" id = "bureau_num_' . $num .'" class = "numbering_clk"><br />' ;
                  $num++; 
                  return $retv;
 			},
