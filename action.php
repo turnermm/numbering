@@ -40,11 +40,7 @@ class action_plugin_numbering extends DokuWiki_Action_Plugin {
                   if(strpos($matches[0],'bureaucracy') == false) return $matches[0];
                   global $num;
                   $num = 0;
-                 $matches[0] =  preg_replace('#class=\"edit\"#', 'value = "" id="' .'bureau_num_' .  $num++  .   '"',$matches[0]);                              
-               //  $matches[3] =  preg_replace('#class=\"edit\"#', 'value = "" id="' .'bureau_num_' .  $num++  .   '"',$matches[3]);                              
-              //   return  '<p style = "font-size:1.5">' .$matches[1] . '&nbsp;'. $matches[2] . '&nbsp;&nbsp;<img src="' . NUMBERING_ICON  . '"></p>';        
-              $matches[2] = preg_replace('#class=\"edit\"#', 'value = "" id="' .'bureau_num_' .  $num++  .   '"',$matches[2]);
-              return $matches[1]. $matches[2] .'<br />';
+                 return   $matches[0] =  preg_replace('#class=\"edit\"#', 'value = "" id="' .'bureau_num_' .  $num++  .   '"',$matches[0]);     
 			},
 			$event->data
 		);		  
