@@ -19,7 +19,7 @@ if (window.toolbar != undefined) {
 }
 
 jQuery( document ).ready(function() {
-     jQuery( "img#bureau_num_0, img#bureau_num_1,img#bureau_num_2" ).click(function() {   
+    jQuery("[id^=bureau_num_]").click(function() {	
            var id = this.id.replace(/num/,'nmbr');           
             var _ret = jQuery('#' + id);
             var params = "";
