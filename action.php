@@ -27,6 +27,8 @@ class action_plugin_numbering extends DokuWiki_Action_Plugin {
         }
 		
         function handle_read(Doku_Event $event, $param){
+             global $num;
+             $num = 0;
             if(strpos($event->data,'bureaucracy') == false) return;
             $numfield = str_replace(',','|',$this->getConf('bureaucracy')); 
             $numfield = preg_replace("/\s+/","",$numfield );
@@ -34,13 +36,14 @@ class action_plugin_numbering extends DokuWiki_Action_Plugin {
 			'#<label>\s*<span>('. $numfield .')</span>\s*<input.*?\>#',
 			function ($matches) {		
                   if(strpos($matches[0],'bureaucracy') == false) return $matches[0];
-                $matches[0] =  preg_replace('#class=\"edit\"#', 'value = "" id="' .'bureau_num' .'"',$matches[0]);
-                $matches[0] .="<br /><span>Click textbox to insert number</span>";
+                  global $num;
+                 $matches[0] =  preg_replace('#class=\"edit\"#', 'value = "" id="' .'bureau_num_' .  $num++  .   '"',$matches[0]);                              
                 return  $matches[0];                
 			},
 			$event->data
 		);		  
 
+    //    $event->data =  "<p><span>For numeric textboxes either click textbox to auto-insert number or insert number manually</span></p>" . $event->data ;
 		}
 	
 	function _ajax_call(Doku_Event $event, $param) {      
