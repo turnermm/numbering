@@ -7,6 +7,8 @@
 if(!defined('DOKU_INC')) define('DOKU_INC',realpath(dirname(__FILE__).'/../../../').'/');
 if(!defined('DOKU_PLUGIN')) define('DOKU_PLUGIN',DOKU_INC.'lib/plugins/');
 define ('NUMBERING_GETNUM', DOKU_PLUGIN . 'numbering/scripts/getnum.php');
+define ('NUMBERING_ICON',  DOKU_REL . 'lib/plugins/numbering/sernum_2.png');
+msg(NUMBERING_ICON);
 require_once(DOKU_PLUGIN.'action.php');
 class action_plugin_numbering extends DokuWiki_Action_Plugin {  
    var $helper;
@@ -33,12 +35,16 @@ class action_plugin_numbering extends DokuWiki_Action_Plugin {
             $numfield = str_replace(',','|',$this->getConf('bureaucracy')); 
             $numfield = preg_replace("/\s+/","",$numfield );
 		  $event->data = preg_replace_callback(
-			'#<label>\s*<span>('. $numfield .')</span>\s*<input.*?\>#',
+			'#<label>\s*<span>('. $numfield .')</span>\s*(<input.*?\>)\s*</label>#',
 			function ($matches) {		
                   if(strpos($matches[0],'bureaucracy') == false) return $matches[0];
                   global $num;
+                  $num = 0;
                  $matches[0] =  preg_replace('#class=\"edit\"#', 'value = "" id="' .'bureau_num_' .  $num++  .   '"',$matches[0]);                              
-                return  $matches[0];                
+               //  $matches[3] =  preg_replace('#class=\"edit\"#', 'value = "" id="' .'bureau_num_' .  $num++  .   '"',$matches[3]);                              
+              //   return  '<p style = "font-size:1.5">' .$matches[1] . '&nbsp;'. $matches[2] . '&nbsp;&nbsp;<img src="' . NUMBERING_ICON  . '"></p>';        
+              $matches[2] = preg_replace('#class=\"edit\"#', 'value = "" id="' .'bureau_num_' .  $num++  .   '"',$matches[2]);
+              return $matches[1]. $matches[2] .'<br />';
 			},
 			$event->data
 		);		  
