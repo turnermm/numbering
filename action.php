@@ -8,7 +8,7 @@ if(!defined('DOKU_INC')) define('DOKU_INC',realpath(dirname(__FILE__).'/../../..
 if(!defined('DOKU_PLUGIN')) define('DOKU_PLUGIN',DOKU_INC.'lib/plugins/');
 define ('NUMBERING_GETNUM', DOKU_PLUGIN . 'numbering/scripts/getnum.php');
 define ('NUMBERING_ICON',  DOKU_REL . 'lib/plugins/numbering/sernum_2.png');
-msg(NUMBERING_ICON);
+
 require_once(DOKU_PLUGIN.'action.php');
 class action_plugin_numbering extends DokuWiki_Action_Plugin {  
    var $helper;
@@ -32,6 +32,7 @@ class action_plugin_numbering extends DokuWiki_Action_Plugin {
              global $num;
              $num = 0;
             if(strpos($event->data,'bureaucracy') == false) return;
+      
             $numfield = str_replace(',','|',$this->getConf('bureaucracy')); 
             $numfield = preg_replace("/\s+/","",$numfield );
 		  $event->data = preg_replace_callback(
@@ -39,13 +40,13 @@ class action_plugin_numbering extends DokuWiki_Action_Plugin {
 			function ($matches) {		
                   if(strpos($matches[0],'bureaucracy') == false) return $matches[0];
                   global $num;
-                  $num = 0;
-                 return   $matches[0] =  preg_replace('#class=\"edit\"#', 'value = "" id="' .'bureau_num_' .  $num++  .   '"',$matches[0]);     
+                  $matches[2] = preg_replace('#class=\"edit\"#', 'value = "" id="' .'bureau_nmbr_' .  $num  .   '"',$matches[2]) ; 
+                 $retv = $matches[1] .' ' . $matches[2].  '&nbsp;&nbsp;<img src="' . NUMBERING_ICON  . '" id = "bureau_num_' . $num .'" class = "numbering_clk"><br />' ;
+                 $num++; 
+                 return $retv;
 			},
 			$event->data
 		);		  
-
-    //    $event->data =  "<p><span>For numeric textboxes either click textbox to auto-insert number or insert number manually</span></p>" . $event->data ;
 		}
 	
 	function _ajax_call(Doku_Event $event, $param) {      
