@@ -19,9 +19,9 @@ if (window.toolbar != undefined) {
 }
 
 jQuery( document ).ready(function() {
-     jQuery( "#bureau_num_1,#bureau_num_0" ).click(function() {
-          if(confirm("insert manually")) return;
-            var _ret = jQuery(this);
+    jQuery("[id^=bureau_num_]").click(function() {	
+           var id = this.id.replace(/num/,'nmbr');           
+            var _ret = jQuery('#' + id);
             var params = "";
             params = 'call=numbr_bureau';
             jQuery.ajax({     
