@@ -7,3 +7,4 @@ $meta['format'] = array('string');
 $meta['nstart'] = array('string');
 $meta['use_imgs'] = array('onoff');
 $meta['imgs'] = array('string');
+$meta['bureaucracy'] = array('string');

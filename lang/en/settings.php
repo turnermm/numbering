@@ -14,3 +14,4 @@ $lang['datestyle']            = 'This sets the date format for strftime, which c
 $lang['format']                = 'This is a string which is used to format the returned value, where %d represents the date , %n the number, %i&lt;n&gt; image number n, and %R a text selection from the editor.   Like the date style this can also take format specifiers.<br /> For instance: ** Date: %d Number: %n **';
 $lang['imgs']                   = 'Comma separated list of images located in data/media, e.g <b>:image.png,:wiki:other_image.png, . . .</b> These will be inserted into the format string in  the order in which they are listed at positions %i1. . . %i&lt;n&gt;';
 $lang['use_imgs']            = 'If set to true, the plugin will attempt to insert images into the format string';
+$lang['bureaucracy']     = 'For use with bureaucracy plugin. Comma separated list of fields which require guaranteed unique numbers. See <a href="https://forum.dokuwiki.org/post/68370">forum</a>.'; 

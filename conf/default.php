@@ -8,3 +8,4 @@ $conf['format'] = "Number: %n --%d" ;
 $conf['nstart'] ="0";
 $conf['use_imgs'] = 0;
 $conf['imgs'] ="";
+$conf['bureaucracy'] = "";
