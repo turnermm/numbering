@@ -19,8 +19,13 @@ class action_plugin_numbering extends DokuWiki_Action_Plugin {
           $controller->register_hook('COMMON_WIKIPAGE_SAVE', 'BEFORE', $this, 'handle_save',array('before'));
           $controller->register_hook('TPL_CONTENT_DISPLAY', 'BEFORE', $this, 'handle_read',array('before')); 		  
  	      $controller->register_hook('AJAX_CALL_UNKNOWN', 'BEFORE', $this,'_ajax_call'); 
+          $controller->register_hook('DOKUWIKI_STARTED', 'AFTER',  $this, '_setjsinfo');
         }
         
+        function _setjsinfo(Doku_Event $event, $param) {
+             global $JSINFO;
+             $JSINFO['nmbring_multi_db'] = $this->getConf('multi_db');
+          }
         function handle_save(Doku_Event $event, $param) {  
          if ($event->data['revertFrom']) return;
           if(!$event->data['contentChanged'] ) return;
@@ -40,7 +45,7 @@ class action_plugin_numbering extends DokuWiki_Action_Plugin {
 			function ($matches) {		
                   if(strpos($matches[0],'bureaucracy') == false) return $matches[0];
                   global $num;
-                  $matches[2] = preg_replace('#class=\"edit.*?\"#', 'value = "" id="' .'bureau_nmbr_' .  $num  .   '"',$matches[2]) ; 
+                  $matches[2] = preg_replace('#class=\"edit.*?\"#', 'value = "" data-db="'. $matches[1] . '" id="' .'bureau_nmbr_' .  $num  .   '"',$matches[2]) ; 
                  $retv = '<label>' .$matches[1] .' ' . $matches[2].  '&nbsp;&nbsp;<img src="' . NUMBERING_ICON  . '" id = "bureau_num_' . $num .'" class = "numbering_clk">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>' ;
                  $num++; 
                  return $retv;
@@ -67,7 +72,13 @@ class action_plugin_numbering extends DokuWiki_Action_Plugin {
         }
         
         function numberingDB() {
-        $db  = metaFN("numbering:seqnum",'.ser');
+         global $INPUT;
+         $db_name = $INPUT->str('data-db');         
+         if($db_name) {
+             $db  = metaFN("numbering:$db_name",'.ser');
+         }
+         else  $db  = metaFN("numbering:seqnum",'.ser');
+	   
         if(!file_exists($db)) {
             io_saveFile($db,"", array());
         }
