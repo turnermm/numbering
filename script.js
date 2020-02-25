@@ -19,11 +19,14 @@ if (window.toolbar != undefined) {
 }
 
 jQuery( document ).ready(function() {
-    jQuery("[id^=bureau_num_]").click(function() {	
+    jQuery("[id^=bureau_num_]").on('click',function(e) {	
            var id = this.id.replace(/num/,'nmbr');           
             var _ret = jQuery('#' + id);
             var params = "";
             params = 'call=numbr_bureau';
+            if(JSINFO['nmbring_multi_db']) {
+              params += '&data-db=' +   _ret.attr("data-db");            
+            }
             jQuery.ajax({     
                url:  DOKU_BASE + 'lib/exe/ajax.php',
                async: true,

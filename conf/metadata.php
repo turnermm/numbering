@@ -8,3 +8,4 @@ $meta['nstart'] = array('string');
 $meta['use_imgs'] = array('onoff');
 $meta['imgs'] = array('string');
 $meta['bureaucracy'] = array('string');
+$meta['multi_db'] = array('onoff');

@@ -9,3 +9,4 @@ $conf['nstart'] ="0";
 $conf['use_imgs'] = 0;
 $conf['imgs'] ="";
 $conf['bureaucracy'] = "";
+$conf['multi_db'] = 0;

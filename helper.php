@@ -23,11 +23,11 @@ class helper_plugin_numbering extends DokuWiki_Plugin {
   }
 
    function getConfValue($name) {
-       if($this->debug) debug($name);
+       if($this->debug) $this->_debug($name);
        return urlencode(trim($this->getConf($name)));
    }   
    
-   function debug($name) {
+   function _debug($name) {
       $val = $this->getConf($name);
       echo "$name = $val\n";
    }
