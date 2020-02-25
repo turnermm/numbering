@@ -15,3 +15,4 @@ $lang['format']                = 'This is a string which is used to format the r
 $lang['imgs']                   = 'Comma separated list of images located in data/media, e.g <b>:image.png,:wiki:other_image.png, . . .</b> These will be inserted into the format string in  the order in which they are listed at positions %i1. . . %i&lt;n&gt;';
 $lang['use_imgs']            = 'If set to true, the plugin will attempt to insert images into the format string';
 $lang['bureaucracy']     = 'For use with bureaucracy plugin. Comma separated list of numeric fields which require unique sequential numbers. See <a href="https://forum.dokuwiki.org/post/68370">forum</a>.'; 
+$lang['multi_db'] = 'Use individual counts for each separate  bureaucracy number field specified in the <code>bureaucracy</code> option.';
