@@ -2,7 +2,8 @@
 
 /**
  * @license    GPL 2 (http://www.gnu.org/licenses/gpl.html)
- * 
+ *
+ * @author Gerrit <klapinklapin@gmail.com>
  * @author Rene <wllywlnt@yahoo.com>
  */
 $lang['nstart']                = 'Het getal waarmee je begint te tellen';
@@ -14,3 +15,5 @@ $lang['format']                = 'Dit is een string die wordt gebruikt om de ret
 ';
 $lang['imgs']                  = 'Komma gescheiden lijst van afbeeldingen in data/media, e.g <b>:image.png,:wiki:other_image.png, ...</b>Deze worden ingevoegd in de formatstring in de volgorde waarin zij worden getoond op de posities %i1. . . %i&lt;n&gt;';
 $lang['use_imgs']              = 'Indien ingesteld op waar, dan zal de plugin trachten afbeeldingen in te voegen in de formatstring';
+$lang['bureaucracy']           = 'Voor gebruik met de bureaucracy plugin. Kommagescheiden lijst van numerieke velden die een unieke opvolgende nummers nodig hebben. Zie <a href="https://forum.dokuwiki.org/post/68370">forum</a>.';
+$lang['multi_db']              = 'Gebruik individuele tellers voor elke aparte bureaucracy getal-veld gespecificeerd in de <code>bureaucracy</code> optie.';
